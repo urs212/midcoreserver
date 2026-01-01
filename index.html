@@ -3,216 +3,175 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Midcore 서버 안내</title>
+<title>마인크래프트 서버 안내</title>
+
 <style>
 body {
-    margin: 0;
-    font-family: "Pretendard", "Apple SD Gothic Neo", sans-serif;
-    background: #f5f6fa;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f5f7fa;
 }
 .container {
-    background: #ffffff;
-    width: 100%;
-    max-width: 420px;
-    padding: 24px;
-    border-radius: 14px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  max-width: 420px;
+  margin: auto;
+  padding: 20px;
 }
-h1 {
-    text-align: center;
-    margin-bottom: 16px;
-}
-.notice, .warning, .rule {
-    padding: 12px;
-    border-radius: 10px;
-    margin-bottom: 12px;
-    font-size: 14px;
-}
-.notice { background: #eef2ff; }
-.warning { background: #ffecec; }
-.rule { background: #fff6e5; }
-.checkbox-area {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 16px;
-}
-button {
-    width: 100%;
-    padding: 14px;
-    margin-top: 16px;
-    border: none;
-    border-radius: 10px;
-    font-size: 15px;
-    cursor: pointer;
-}
-button:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-}
-#confirmBtn { background: #4f6cff; color: #fff; }
-#downloadBtn { background: #1abc9c; color: #fff; }
-.link {
-    text-align: center;
-    color: #4f6cff;
-    margin-top: 10px;
-    cursor: pointer;
-    font-size: 13px;
+.box {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.08);
 }
 .hidden { display: none; }
-select {
-    width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    margin-bottom: 12px;
+button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
 }
+.primary { background: #2563eb; color: #fff; }
+.secondary { background: #e5e7eb; margin-top: 8px; }
+.notice { background: #eef2ff; padding: 12px; border-radius: 8px; margin-bottom: 10px; }
+.warning { background: #fee2e2; padding: 12px; border-radius: 8px; margin-bottom: 10px; }
+.rule { background: #fef3c7; padding: 12px; border-radius: 8px; margin-bottom: 10px; }
+.center { text-align: center; }
+.link { color:#2563eb; text-decoration:underline; cursor:pointer; }
+.server { font-size:18px; font-weight:bold; text-align:center; }
 </style>
 </head>
+
 <body>
 <div class="container">
 
-<!-- 나이 선택 화면 -->
-<div id="ageScreen">
-    <h1>이용자 학년 선택</h1>
-    <select id="gradeSelect">
-        <option value="">선택하세요</option>
-        <option>초등 1</option>
-        <option>초등 2</option>
-        <option>초등 3</option>
-        <option>초등 4</option>
-        <option>초등 5</option>
-        <option>초등 6</option>
-        <option>중등 1</option>
-        <option>중등 2</option>
-        <option>중등 3</option>
-    </select>
-    <button onclick="goInfo()">다음</button>
+<!-- 학년 -->
+<div id="age" class="box">
+<h2>학년 선택</h2>
+<select id="grade" style="width:100%; padding:12px; font-size:16px;">
+<option value="">선택</option>
+<option>초등 1</option><option>초등 2</option><option>초등 3</option>
+<option>초등 4</option><option>초등 5</option><option>초등 6</option>
+<option>중등 1</option><option>중등 2</option><option>중등 3</option>
+</select>
+<button class="primary" onclick="nextInfo()">다음</button>
 </div>
 
-<!-- 안내 화면 -->
-<div id="infoScreen" class="hidden">
-    <h1>마인크래프트 서버 안내</h1>
+<!-- 안내 -->
+<div id="info" class="box hidden">
+<h1>마인크래프트 서버 안내</h1>
 
-    <div class="notice" id="serverStatus">서버 상태 확인 중...</div>
+<div class="notice" id="status">서버 상태 확인 중...</div>
 
-    <div class="notice">
-        <b>서버 버전</b><br>
-        Minecraft Java Edition 1.21.10
-    </div>
-
-    <p style="font-size:14px; line-height:1.5">
-        지구 맵 기반 <b>국가 전쟁 서버</b>입니다.<br>
-        코어(Core)를 파괴하여 국가를 점령합니다.<br>
-        전쟁은 <b>유럽 대륙</b>에서 진행됩니다.
-    </p>
-
-    <div class="warning">
-        <b>핵 / 치트 금지</b><br>
-        안티치트 시스템이 상시 운영됩니다.<br>
-        적발 시 <b>경고 없이 즉시 제재 또는 영구 밴</b>됩니다.
-    </div>
-
-    <div class="rule">
-        <b>🚫 테러 금지</b><br>
-        무차별 파괴, 반복 공격, 서버 운영 방해 행위는<br>
-        즉시 제재 대상입니다.
-    </div>
-
-    <div class="rule">
-        <b>🚫 동맹 금지 (즉시 밴)</b><br>
-        국가 간 동맹, 담합, 불가침 조약 전면 금지<br>
-        <b>확인 즉시 경고 없이 영구 밴</b>
-    </div>
-
-    <div class="checkbox-area">
-        <input type="checkbox" id="agree" onchange="toggleConfirm()">
-        <label for="agree">모든 내용을 다 읽었습니까?</label>
-    </div>
-
-    <button id="confirmBtn" disabled onclick="showResource()">확인</button>
+<div class="notice">
+<b>서버 버전</b><br>
+Minecraft Java Edition 1.21.10
 </div>
 
-<!-- 리소스팩 화면 -->
-<div id="resourceScreen" class="hidden">
-    <h1>리소스팩 필요</h1>
-    <p style="font-size:14px; line-height:1.5">
-        이 서버에 입장하려면<br><b>전용 리소스팩</b>이 필요합니다.
-    </p>
-    <button id="downloadBtn" onclick="downloadPack()">리소스팩 다운로드</button>
-    <div class="link" onclick="alreadyInstalled()">이미 설치했습니다</div>
+<p>
+지구 맵 기반 <b>국가 전쟁 서버</b><br>
+코어(Core)를 파괴하여 국가를 점령합니다.<br>
+전쟁 지역: <b>유럽 대륙</b>
+</p>
+
+<div class="warning">
+<b>핵 / 치트 금지</b><br>
+안티치트 상시 운영<br>
+<b>적발 시 즉시 영구 밴</b>
 </div>
 
-<!-- 주소 화면 -->
-<div id="addressScreen" class="hidden">
-    <h1>서버 주소</h1>
-    <div class="notice" id="serverAddress">mc.midcore.64bit.kr</div>
-    <button onclick="copyAddress()">주소 복사</button>
+<div class="rule">
+<b>🚫 테러 금지</b><br>
+운영 방해 및 무차별 파괴 즉시 제재
+</div>
+
+<div class="rule">
+<b>🚫 동맹 금지</b><br>
+국가 간 동맹, 담합<br>
+<b>확인 즉시 경고 없이 영구 밴</b>
+</div>
+
+<input type="checkbox" id="agree"> 모든 내용을 다 읽었습니까?
+<button class="primary" onclick="goResource()">확인</button>
+</div>
+
+<!-- 리소스팩 -->
+<div id="resource" class="box hidden">
+<h2>리소스팩 필요</h2>
+<p>서버 입장을 위해 리소스팩이 필요합니다.</p>
+<a href="re.zip" download>
+<button class="primary" onclick="downloaded()">리소스팩 다운로드</button>
+</a>
+</div>
+
+<!-- 확인 -->
+<div id="confirm" class="box hidden">
+<p>리소스팩을 다운로드 하셨습니까?</p>
+<button class="primary" onclick="showServer()">다운로드 했습니다</button>
+<button class="secondary" onclick="backDownload()">아니요, 다운로드 하겠습니다</button>
+</div>
+
+<!-- 서버 -->
+<div id="server" class="box hidden">
+<h2>서버 주소</h2>
+<div class="server" id="addr">mc.midcore.64bit.kr</div>
+<button class="primary" onclick="copy()">주소 복사</button>
+<button class="secondary" onclick="goGuide()">안내사이트로 이동</button>
+<p id="copied"></p>
 </div>
 
 </div>
 
 <script>
-const SERVER_ADDRESS = "mc.midcore.64bit.kr";
+const SERVER = "mc.midcore.64bit.kr";
 
-function goInfo() {
-    const grade = document.getElementById("gradeSelect").value;
-    if (!grade) {
-        alert("학년을 선택하세요");
-        return;
-    }
-    document.getElementById("ageScreen").classList.add("hidden");
-    document.getElementById("infoScreen").classList.remove("hidden");
+function nextInfo() {
+  if (!document.getElementById("grade").value) return alert("학년 선택");
+  age.classList.add("hidden");
+  info.classList.remove("hidden");
 }
 
-function toggleConfirm() {
-    document.getElementById("confirmBtn").disabled = !document.getElementById("agree").checked;
+function goResource() {
+  if (!agree.checked) return alert("체크 필요");
+  info.classList.add("hidden");
+  resource.classList.remove("hidden");
 }
 
-function showResource() {
-    document.getElementById("infoScreen").classList.add("hidden");
-    document.getElementById("resourceScreen").classList.remove("hidden");
+function downloaded() {
+  setTimeout(()=>{
+    resource.classList.add("hidden");
+    confirm.classList.remove("hidden");
+  },1000);
 }
 
-function alreadyInstalled() {
-    document.getElementById("resourceScreen").classList.add("hidden");
-    document.getElementById("addressScreen").classList.remove("hidden");
+function backDownload() {
+  confirm.classList.add("hidden");
+  resource.classList.remove("hidden");
 }
 
-function downloadPack() {
-    const link = document.createElement("a");
-    link.href = "re.zip";
-    link.download = "re.zip";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-
-    setTimeout(() => {
-        alreadyInstalled();
-    }, 1500);
+function showServer() {
+  confirm.classList.add("hidden");
+  server.classList.remove("hidden");
+  copy();
 }
 
-function copyAddress() {
-    navigator.clipboard.writeText(SERVER_ADDRESS);
-    alert("서버 주소가 복사되었습니다");
+function copy() {
+  navigator.clipboard.writeText(SERVER);
+  copied.innerText="클립보드에 복사되었습니다";
 }
 
-// 서버 상태 자동 새로고침 (30초)
-async function checkServer() {
-    try {
-        const res = await fetch(`https://api.mcsrvstat.us/2/${SERVER_ADDRESS}`);
-        const data = await res.json();
-        document.getElementById("serverStatus").innerText = data.online ? "서버 🟢온라인" : "서버 🔴오프라인";
-    } catch {
-        document.getElementById("serverStatus").innerText = "상태 확인 실패";
-    }
+function goGuide() {
+  location.href="http://midcore.shop/3";
 }
-checkServer();
-setInterval(checkServer, 30000);
+
+async function check() {
+  const r = await fetch(`https://api.mcsrvstat.us/2/${SERVER}`);
+  const d = await r.json();
+  status.innerText = d.online ? "온라인" : "오프라인";
+}
+check();
+setInterval(check,30000);
 </script>
 </body>
 </html>

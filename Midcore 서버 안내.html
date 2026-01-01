@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<!-- saved from url=(0030)https://rule.midcore.64bit.kr/ -->
+<html lang="ko"><script src="chrome-extension://nimlmejbmnecnaghgmbahmbaddhjbecg/content/location/location.js" id="nimlmejbmnecnaghgmbahmbaddhjbecg"></script><script src="chrome-extension://nimlmejbmnecnaghgmbahmbaddhjbecg/libs/extend-native-history-api.js"></script><script src="chrome-extension://nimlmejbmnecnaghgmbahmbaddhjbecg/libs/requests.js"></script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Midcore 서버 안내</title>
+<style>
+body {
+    margin: 0;
+    font-family: "Pretendard", "Apple SD Gothic Neo", sans-serif;
+    background: #f5f6fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.container {
+    background: #ffffff;
+    width: 100%;
+    max-width: 420px;
+    padding: 24px;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+h1 {
+    text-align: center;
+    margin-bottom: 16px;
+}
+.notice, .warning, .rule {
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+.notice { background: #eef2ff; }
+.warning { background: #ffecec; }
+.rule { background: #fff6e5; }
+.checkbox-area {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+}
+button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 16px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+}
+button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+#confirmBtn { background: #4f6cff; color: #fff; }
+#downloadBtn { background: #1abc9c; color: #fff; }
+.link {
+    text-align: center;
+    color: #4f6cff;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 13px;
+}
+.hidden { display: none; }
+select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-bottom: 12px;
+}
+</style>
+<script bis_use="true" type="text/javascript" charset="utf-8" data-bis-config="[&quot;facebook.com/&quot;,&quot;twitter.com/&quot;,&quot;youtube-nocookie.com/embed/&quot;,&quot;//vk.com/&quot;,&quot;//www.vk.com/&quot;,&quot;linkedin.com/&quot;,&quot;//www.linkedin.com/&quot;,&quot;//instagram.com/&quot;,&quot;//www.instagram.com/&quot;,&quot;//www.google.com/recaptcha/api2/&quot;,&quot;//hangouts.google.com/webchat/&quot;,&quot;//www.google.com/calendar/&quot;,&quot;//www.google.com/maps/embed&quot;,&quot;spotify.com/&quot;,&quot;soundcloud.com/&quot;,&quot;//player.vimeo.com/&quot;,&quot;//disqus.com/&quot;,&quot;//tgwidget.com/&quot;,&quot;//js.driftt.com/&quot;,&quot;friends2follow.com&quot;,&quot;/widget&quot;,&quot;login&quot;,&quot;//video.bigmir.net/&quot;,&quot;blogger.com&quot;,&quot;//smartlock.google.com/&quot;,&quot;//keep.google.com/&quot;,&quot;/web.tolstoycomments.com/&quot;,&quot;moz-extension://&quot;,&quot;chrome-extension://&quot;,&quot;/auth/&quot;,&quot;//analytics.google.com/&quot;,&quot;adclarity.com&quot;,&quot;paddle.com/checkout&quot;,&quot;hcaptcha.com&quot;,&quot;recaptcha.net&quot;,&quot;2captcha.com&quot;,&quot;accounts.google.com&quot;,&quot;www.google.com/shopping/customerreviews&quot;,&quot;buy.tinypass.com&quot;,&quot;gstatic.com&quot;,&quot;secureir.ebaystatic.com&quot;,&quot;docs.google.com&quot;,&quot;contacts.google.com&quot;,&quot;github.com&quot;,&quot;mail.google.com&quot;,&quot;chat.google.com&quot;,&quot;audio.xpleer.com&quot;,&quot;keepa.com&quot;,&quot;static.xx.fbcdn.net&quot;,&quot;sas.selleramp.com&quot;,&quot;1plus1.video&quot;,&quot;console.googletagservices.com&quot;,&quot;//lnkd.demdex.net/&quot;,&quot;//radar.cedexis.com/&quot;,&quot;//li.protechts.net/&quot;,&quot;challenges.cloudflare.com/&quot;,&quot;ogs.google.com&quot;]" src="chrome-extension://nimlmejbmnecnaghgmbahmbaddhjbecg/executors/traffic.js"></script></head>
+<body __processed_8a50bbe5-fa81-482c-817b-b0f0ac3811b9__="true" bis_register="W3sibWFzdGVyIjp0cnVlLCJleHRlbnNpb25JZCI6Im5pbWxtZWpibW5lY25hZ2hnbWJhaG1iYWRkaGpiZWNnIiwiYWRibG9ja2VyU3RhdHVzIjp7IkRJU1BMQVkiOiJkaXNhYmxlZCIsIkZBQ0VCT09LIjoiZGlzYWJsZWQiLCJUV0lUVEVSIjoiZGlzYWJsZWQiLCJSRURESVQiOiJkaXNhYmxlZCIsIlBJTlRFUkVTVCI6ImRpc2FibGVkIiwiSU5TVEFHUkFNIjoiZGlzYWJsZWQiLCJUSUtUT0siOiJkaXNhYmxlZCIsIkxJTktFRElOIjoiZGlzYWJsZWQiLCJDT05GSUciOiJkaXNhYmxlZCJ9LCJ2ZXJzaW9uIjoiMi4wLjM1Iiwic2NvcmUiOjIwMDM1fV0=">
+<div class="container" bis_skin_checked="1">
+
+<!-- 나이 선택 화면 -->
+<div id="ageScreen" bis_skin_checked="1">
+    <h1>이용자 학년 선택</h1>
+    <select id="gradeSelect">
+        <option value="">선택하세요</option>
+        <option>초등 1</option>
+        <option>초등 2</option>
+        <option>초등 3</option>
+        <option>초등 4</option>
+        <option>초등 5</option>
+        <option>초등 6</option>
+        <option>중등 1</option>
+        <option>중등 2</option>
+        <option>중등 3</option>
+    </select>
+    <button onclick="goInfo()">다음</button>
+</div>
+
+<!-- 안내 화면 -->
+<div id="infoScreen" class="hidden" bis_skin_checked="1">
+    <h1>마인크래프트 서버 안내</h1>
+
+    <div class="notice" id="serverStatus" bis_skin_checked="1">서버 🔴오프라인</div>
+
+    <div class="notice" bis_skin_checked="1">
+        <b>서버 버전</b><br>
+        Minecraft Java Edition 1.21.10
+    </div>
+
+    <p style="font-size:14px; line-height:1.5">
+        지구 맵 기반 <b>국가 전쟁 서버</b>입니다.<br>
+        코어(Core)를 파괴하여 국가를 점령합니다.<br>
+        전쟁은 <b>유럽 대륙</b>에서 진행됩니다.
+    </p>
+
+    <div class="warning" bis_skin_checked="1">
+        <b>핵 / 치트 금지</b><br>
+        안티치트 시스템이 상시 운영됩니다.<br>
+        적발 시 <b>경고 없이 즉시 제재 또는 영구 밴</b>됩니다.
+    </div>
+
+    <div class="rule" bis_skin_checked="1">
+        <b>🚫 테러 금지</b><br>
+        무차별 파괴, 반복 공격, 서버 운영 방해 행위는<br>
+        즉시 제재 대상입니다.
+    </div>
+
+    <div class="rule" bis_skin_checked="1">
+        <b>🚫 동맹 금지 (즉시 밴)</b><br>
+        국가 간 동맹, 담합, 불가침 조약 전면 금지<br>
+        <b>확인 즉시 경고 없이 영구 밴</b>
+    </div>
+
+    <div class="checkbox-area" bis_skin_checked="1">
+        <input type="checkbox" id="agree" onchange="toggleConfirm()">
+        <label for="agree">모든 내용을 다 읽었습니까?</label>
+    </div>
+
+    <button id="confirmBtn" disabled="" onclick="showResource()">확인</button>
+</div>
+
+<!-- 리소스팩 화면 -->
+<div id="resourceScreen" class="hidden" bis_skin_checked="1">
+    <h1>리소스팩 필요</h1>
+    <p style="font-size:14px; line-height:1.5">
+        이 서버에 입장하려면<br><b>전용 리소스팩</b>이 필요합니다.
+    </p>
+    <button id="downloadBtn" onclick="downloadPack()">리소스팩 다운로드</button>
+    <div class="link" onclick="alreadyInstalled()" bis_skin_checked="1">이미 설치했습니다</div>
+</div>
+
+<!-- 주소 화면 -->
+<div id="addressScreen" class="hidden" bis_skin_checked="1">
+    <h1>서버 주소</h1>
+    <div class="notice" id="serverAddress" bis_skin_checked="1">mc.midcore.64bit.kr</div>
+    <button onclick="copyAddress()">주소 복사</button>
+</div>
+
+</div>
+
+<script>
+const SERVER_ADDRESS = "mc.midcore.64bit.kr";
+
+function goInfo() {
+    const grade = document.getElementById("gradeSelect").value;
+    if (!grade) {
+        alert("학년을 선택하세요");
+        return;
+    }
+    document.getElementById("ageScreen").classList.add("hidden");
+    document.getElementById("infoScreen").classList.remove("hidden");
+}
+
+function toggleConfirm() {
+    document.getElementById("confirmBtn").disabled = !document.getElementById("agree").checked;
+}
+
+function showResource() {
+    document.getElementById("infoScreen").classList.add("hidden");
+    document.getElementById("resourceScreen").classList.remove("hidden");
+}
+
+function alreadyInstalled() {
+    document.getElementById("resourceScreen").classList.add("hidden");
+    document.getElementById("addressScreen").classList.remove("hidden");
+}
+
+function downloadPack() {
+    const link = document.createElement("a");
+    link.href = "re.zip";
+    link.download = "re.zip";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    setTimeout(() => {
+        alreadyInstalled();
+    }, 1500);
+}
+
+function copyAddress() {
+    navigator.clipboard.writeText(SERVER_ADDRESS);
+    alert("서버 주소가 복사되었습니다");
+}
+
+// 서버 상태 자동 새로고침 (30초)
+async function checkServer() {
+    try {
+        const res = await fetch(`https://api.mcsrvstat.us/2/${SERVER_ADDRESS}`);
+        const data = await res.json();
+        document.getElementById("serverStatus").innerText = data.online ? "서버 🟢온라인" : "서버 🔴오프라인";
+    } catch {
+        document.getElementById("serverStatus").innerText = "상태 확인 실패";
+    }
+}
+checkServer();
+setInterval(checkServer, 30000);
+</script>
+
+
+</body></html>
